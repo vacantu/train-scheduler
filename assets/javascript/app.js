@@ -38,19 +38,17 @@ $(document).ready(function() {
 
 // Uploads train data to the database
         database.ref().push(newTrain);
-// add a popup window that lasts only 5 secs.
-        // alert("Train successfully added");
 
 // Clears all input-boxes
         $("#input-trainname").val("");
         $("#input-destination").val("");
-        $("#input-firstTrain").val("");
+        $("#input-firstTrainTime").val("");
         $("#input-frequency").val("");
     });
 
 // Create Firebase event for adding train to the database and a row in the html when a user adds an entry
     database.ref().on("child_added", function (childSnapshot) {
-        console.log(childSnapshot.val());
+//        console.log(childSnapshot.val());
 
 // Store everything into a variable.
         var trainName = childSnapshot.val().name;
@@ -59,15 +57,17 @@ $(document).ready(function() {
         var frequency = childSnapshot.val().frequency;
 
 // Convert first train to milisecondas
-        var firstTrainMiliseconds = moment(firstTrain, 'HH:MM:SS').diff(moment().startOf('day'), 'seconds')*1000;
-        console.log("First train miliseconds: ", firstTrainMiliseconds);
+        //var firstTrainMiliseconds = moment(firstTrain, 'HH:MM:SS').diff(moment().startOf('day'), 'seconds')*1000;
+        let converted = convertToMilliseconds(firstTrain);
+//      console.log("First train miliseconds: ", firstTrainMiliseconds,  converted);
 // Determine current time in miliseconds
         var nowMilliseconds = moment().unix();
 
 // Calc next train departure
-        let nextTrain = firstTrainMiliseconds + (frequency*1000);
-        while (nextTrain < nowMilliseconds+ (frequency*1000)) {
-            nextTrain = nextTrain + (frequency*1000);
+        let nextTrain = converted + (frequency*60000);
+//        console.log("next train: ",nextTrain);
+        while (nextTrain < nowMilliseconds) {
+            nextTrain = nextTrain + (frequency*60000);
         }
 
 // Humanizes the next train vaue 
@@ -81,20 +81,24 @@ $(document).ready(function() {
             $("<td id='nextTrain'>").text(nextTrain)
         );
 
-        // Append the new row to the table
+// Append the new row to the table
         $("#trains-table > tbody").append(newRow);
     });
 
 // Displays and updates clock every second
-var clockElement = document.getElementById( "clock" );  
-var nextElement =   document.getElementById( "nextTrain" );
+    var clockElement = document.getElementById( "clock" );  
+    var nextElement =   document.getElementById( "nextTrain" );
 
-function updateClock ( clock ) {
-        clock.innerHTML = new Date().toLocaleTimeString({hour12: true}); 
+    function updateClock ( clock ) {
+            clock.innerHTML = new Date(); 
     }
     setInterval(function () {
-        updateClock( clockElement );
+        updateClock(clockElement);
     }, 1000); 
     
-
+// Convert to milliseconds
+    function convertToMilliseconds (militaryTime) {    
+        var timeParts = militaryTime.split(":");
+        return((timeParts[0] * (60000 * 60)) + (timeParts[1] * 60000) + (timeParts[2] * 1000));
+    }
 })

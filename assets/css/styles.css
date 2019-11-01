@@ -6,6 +6,7 @@
     float: right;
     font-style: oblique;
 }
-img {
-    float: right;
+form {
+    width: 95%;
+    margin: auto;
 }
