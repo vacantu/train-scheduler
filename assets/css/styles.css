@@ -1,0 +1,11 @@
+.main-container {
+
+}
+#clock {
+    font-size: 24px;
+    float: right;
+    font-style: oblique;
+}
+img {
+    float: right;
+}

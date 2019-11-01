@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Schedule - Homework</title>
+        <!-- JQuery Reference -->    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Firebase Reference -->
+        <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-analytics.js"></script>
+        <!-- Moment.js Reference -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="assets/javascript/app.js"</script></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+</head>
+<body>
+<div class="container-fluid main-container">
+<!-- Table definition - only header will be defined, rows and columns dinamically created-->
+<div>
+        <span id="clock"></span>
+        <h1>Ferrocarril Mexicano Schedule</h1>
+    
+</div>
+
+<div class="row>"></div>
+    <div class="col-sm-7">
+            <table id="trains-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">First Train</th>
+                        <th scope="col">Frequency (min)</th>
+                        <th scope="col">Next Train</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+             <!-- New trains are added here -->
+                    </tbody>
+                </table>
+    </div>
+    <div class="col-sm-auto">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Ferromex-map.png" width=300px; height="300px;"> 
+    </div>
+
+</div>
+
+<!--- Input form to add new trains and its data -->
+    <h2>Add new train</h2>
+    <form>
+        <div class="form-group row">
+            <label for="trainName" class="col-sm-2 col-form-label">Train name</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-trainname">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="destination" class="col-sm-2 col-form-label">Destination</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-destination">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="firstTrainTime" class="col-sm-2 col-form-label">First Train Time</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-firstTrainTime" placeholder="hh:mm:ss">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="frequency" class="col-sm-2 col-form-label">Frequency</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-frequency" placeholder="Minutes">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+            <button id="add-train-btn" type="submit"  class="btn btn-primary">Add train</button>
+            </div>
+        </div>
+    </form>
+</div>  
+
+
+
+
+</body>
+</html>
