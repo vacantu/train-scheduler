@@ -1,7 +1,9 @@
 //$(document).ready(function () {
     
+import { GLOBALS } from './globals';
+
     const firebaseConfig = {
-        apiKey: "AIzaSyBy_JKrHE0OhLK13PiWTTa_qSlps2oBKyg",
+        apiKey: GLOBALS.apiKey,
         authDomain: "ft-vcantu.firebaseapp.com",
         databaseURL: "https://ft-vcantu.firebaseio.com",
         projectId: "ft-vcantu",
